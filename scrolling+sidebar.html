@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smooth Scrolling</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <style>
+        body {margin-bottom: 100px;}
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .menu{
+            position: fixed;
+            right: 8px;
+            z-index: 101;
+
+        }
+        .main{
+            position: absolute;
+            right: 0;
+            margin: 0 8px 0 220px;
+        }
+        .content {
+            height: 500px;
+            border: 1px solid gray;
+            padding: 8px;
+        }
+
+        .selectedItem{
+            background-color: #ddd;
+        }
+
+        .buttonTop {
+            position: fixed;
+            right: 0; bottom: 92px;
+            font-size: 18px;
+            width: 100px;
+            height: 50px;
+            background-color: lightcyan;
+            text-align: center;
+            margin: 8px 8px;
+            z-index: 102;
+        }
+
+        .menuItem {
+            color: black;
+            font-family: sans-serif;
+        }
+
+        .fixedBlock{
+
+            top: 60px;
+            box-shadow:0 2px 4px rgba(0, 0, 0, .3);
+            background: lavenderblush;
+            opacity: .9;
+            padding: 3px 3px;
+            font-family: sans-serif; color: darkslategray; font-size: small;
+            margin: 0 0 0 5px;
+            margin-top: 50px;
+        }
+
+        .sideBar{
+            position: relative;
+            float: left;
+            width: 200px;
+        }
+
+
+        #footer {
+            position: fixed;
+            left: 0; bottom: 0;
+            padding: 10px;
+            background: darkblue;
+            color: #fff;
+            height: 60px;
+            width: 100%;
+
+        }
+
+
+    </style>
+
+    <script>
+
+   </script>
+
+</head>
+<body>
+
+
+<button class="buttonTop" onClick="toTop()">To top</button>
+<div class="menu">
+    <ul id="selectMenu">
+        <li id="grayMenuItem"><a  class="menuItem">Gray</a> </li>
+        <li id="greenMenuItem"><a  class="menuItem">Green</a> </li>
+        <li id="pinkMenuItem"><a  class="menuItem">Pink</a> </li>
+        <li id="yellowMenuItem"><a  class="menuItem">Yellow</a> </li>
+        <li id="cyanMenuItem"><a  class="menuItem">Cyan</a> </li>
+        <li id="coralMenuItem"><a  class="menuItem">Coral</a> </li>
+        <li id="steelMenuItem"><a  class="menuItem">Steel</a> </li>
+    </ul>
+
+</div>
+
+
+<div class="sideBar" >
+<div class="fixedBlock">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+    </p>
+    <p>
+        Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+    </p>
+    <p>
+        Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+    </p>
+    <p>
+        Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+    </p>
+</div>
+</div>
+
+
+<div class="main">
+    <div style="height: 50px">
+
+    </div>
+    <div id="Gray" class="content" style="background: lightgray;">
+        <a id="Agray"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+
+    <div id="Green" class="content" style="background: lightgreen">
+        <a id="Agreen"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+
+    <div id="Pink" class="content" style="background: lightpink">
+        <a id="Apink"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+
+    <div id="Yellow" class="content" style="background: lightyellow">
+        <a id="Ayellow"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+
+    <div id="Cyan" class="content" style="background: lightcyan">
+        <a id="Acyan"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+    <div id="Coral" class="content" style="background: lightcoral">
+        <a id="Acoral"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+    <div id="Steel" class="content" style="background: lightsteelblue">
+        <a id="Asteel"></a>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer velit nunc, euismod ut turpis at, sollicitudin porta lectus. Maecenas vehicula, nunc ac elementum feugiat, enim nibh commodo ante, eget dapibus lorem orci vel elit. Ut consequat tortor at arcu vestibulum consectetur. Quisque mattis augue in nulla eleifend, id cursus sapien aliquet. Pellentesque a efficitur ligula. Proin feugiat faucibus mattis. Nulla a mollis felis, eget faucibus justo. Mauris aliquet, justo in rutrum condimentum, ligula nisl varius erat, id pellentesque turpis ipsum non nulla. Integer at nisi sapien. Integer varius in sem condimentum varius. Quisque efficitur sed arcu quis pellentesque. Fusce a dui diam. Nullam suscipit blandit tortor in dictum. In ultricies enim et sapien aliquam, quis auctor elit consequat.
+        </p>
+        <p>
+            Nulla fringilla ante id interdum ultricies. Nam ac laoreet nibh, vitae maximus arcu. Etiam quam diam, auctor ac tortor sed, dictum consequat leo. Praesent et convallis nibh. Sed fermentum, metus tristique feugiat accumsan, lorem velit consequat nulla, sit amet venenatis neque nibh id ante. Nunc dapibus, justo vel interdum rutrum, enim tortor semper lectus, ut ultricies orci quam id risus. Ut scelerisque tortor eu tincidunt lacinia. Morbi sollicitudin dignissim enim, eu aliquam lectus faucibus in. Nunc cursus ante erat, sed tincidunt nibh mattis quis.
+        </p>
+        <p>
+            Aenean quis risus justo. Cras finibus tortor vel ligula lacinia, vitae facilisis elit consequat. Fusce lobortis quam lobortis, pulvinar ex non, malesuada eros. Ut dolor orci, ornare vel dignissim a, eleifend ultrices nunc. Fusce felis purus, venenatis et tincidunt sed, ultrices a velit. Morbi pellentesque dui vel hendrerit consequat. Proin eget consequat est.
+        </p>
+        <p>
+            Proin vitae accumsan felis. Maecenas id luctus arcu, quis pharetra quam. Sed eu enim gravida, hendrerit nisl in, tempor justo. Nunc mollis a enim sed scelerisque. Suspendisse tempor libero a mauris vulputate porta. Donec commodo libero et sem fringilla gravida a vel ante. Nam sed vulputate libero. Etiam scelerisque scelerisque vestibulum. Cras sed rutrum lectus, imperdiet mattis urna. Fusce mattis erat non purus vestibulum, ac hendrerit eros viverra. Aenean non neque ac nulla blandit luctus. Sed nec leo volutpat, sodales lorem non, dictum turpis. Cras venenatis quam vel velit laoreet sodales. Proin elementum enim non porta molestie.
+        </p>
+    </div>
+
+
+</div>
+
+
+
+
+<div id="footer" >
+
+    <h3>Footer</h3>
+
+</div>
+
+<script>
+
+    if(window.NodeList && !NodeList.prototype.forEach) {
+        NodeList.prototype.forEach = Array.prototype.forEach;
+    }
+    if(window.HTMLCollection && !HTMLCollection.prototype.forEach) {
+        HTMLCollection.prototype.forEach = Array.prototype.forEach;
+    }
+
+
+
+    var links = document.querySelectorAll('#selectMenu a');
+    NodeList.prototype.addEventListener = function (event, handler){
+        this.forEach(function (elem) {
+            elem.addEventListener(event, handler);
+        });
+    }
+
+
+    
+
+    links.addEventListener('click',function () {
+        let targetId = this.innerHTML;
+        let targetY = document.getElementById(targetId).offsetTop;
+
+        console.log(targetId, targetY, window.pageYOffset);
+        downScroll(targetY - 80);
+
+    });
+
+
+    //window.scrollBy(0,4)
+
+
+    function downScroll(targetY){          // скроллинг
+        setTimeout(function (){
+            let y = window.pageYOffset || document.documentElement.scrollTop;
+            let pageHeight = document.body.offsetHeight;
+            let windowHeight = window.innerHeight;
+            window.scrollBy(0, (targetY > y ? 1 : -1));
+
+            if ((pageHeight - y) > windowHeight && y !== targetY)
+            setTimeout(arguments.callee, 1);
+            }, 1);
+            }
+
+
+
+
+    function toTop() {                  //переход в верхнюю позицию
+
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
+    }
+
+
+
+    var divs = document.querySelectorAll('div.content');
+    let scrollPosition = 0;
+    let ticking = false;
+
+    window.addEventListener('scroll', function(e) {
+        scrollPosition = window.scrollY;
+
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+
+                for (d=0; d < divs.length; d++){
+                    if (divs[d].offsetTop - scrollPosition < 100 && divs[d].offsetTop - scrollPosition > 0) {
+                        //console.log(divs[d].id, divs[d].offsetTop - scrollPosition);
+                        links[d].classList.add("selectedItem");
+                    }else {links[d].classList.remove("selectedItem");}
+                }
+
+                ticking = false;
+            });
+
+            ticking = true;
+        }
+    });
+
+
+
+    function linkJump(destName){
+        let myY = window.pageYOffset;
+        let targetY = document.getElementById(destName).offsetTop;
+        console.log(myY, targetY);
+
+    }
+
+
+
+</script>
+
+
+</body>
+
+
+</html>

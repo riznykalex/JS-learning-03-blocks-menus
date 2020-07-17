@@ -185,10 +185,6 @@
             }
             
             rowCounter = (blocks.length % (columnCounter + 1)?Math.floor(blocks.length / (columnCounter + 1))+1:Math.floor(blocks.length / (columnCounter + 1))); //количество строк
-
-            if (blocks[i].offsetHeight > maxHeight) {
-                maxHeight = blocks[i].offsetHeight;
-            }
         }
 
         console.log(columnCounter, rowCounter);

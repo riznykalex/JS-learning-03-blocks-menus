@@ -203,11 +203,22 @@
 
 </body>
 <script>
+/*
+* в плагин вынести фукцию которая будкт
+* обрабатывать коллекции
+* и доступна далее
+* событие должно
+* вызывать плагиин / функцию
+* */
+
+
 
     (function( $ ){
         var a = {};
         var maxHeight = Math.max.apply(Math,  $('div.content').map(function(){return $(this).height()}).get());
         $.fn.blocksAlign = function() {
+
+
         $('div.content').each(function (index, element) {
                 $(element).attr("realHeight", Math.round($(element).height()));
 
@@ -245,10 +256,10 @@
 
         })(jQuery);
 
+
+
+
     $(window).blocksAlign();
-    $(window).resize(function (){
-        $(window).blocksAlign();
-    });
 
 
 

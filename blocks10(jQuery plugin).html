@@ -209,12 +209,15 @@
 
         $.fn.adjustMyBlocks=function(){
            // console.log(this);
-            var a = {};
-            var maxHeight = Math.max.apply(Math,  this.map(function(){return $(this).height()}).get());
-            var self= this;
+            let a = {};
+            let maxHeight = Math.max.apply(Math, this.map(function () {
+                return $(this).height()
+            }).get());
+            let self = this;
 
             $(window).resize(function () {
-                adjustIt();
+                location.reload();
+//                adjustIt();
                });
             $(window).ready(function () {
                 adjustIt();
@@ -225,6 +228,7 @@
             function adjustIt(){
 
                 self.each(function (index, element) {
+
                         $(element).attr("realHeight", Math.round($(element).height()));
                         $(element).height(maxHeight);
                         if (!a[Math.round($(element).offset().top)]) {
@@ -238,9 +242,10 @@
                 );
 
 
-                for (var prop in a) {
+                for (let prop in a) {
                     let localMaxHeight = 0;
                     for (let i = 0; i < a[prop].length; i++) {
+
                         let elemRealHeight = a[prop][i].getAttribute('realHeight');
                         if (elemRealHeight > localMaxHeight) {
                             localMaxHeight = elemRealHeight;
@@ -250,6 +255,7 @@
                         a[prop][i].style.height = localMaxHeight + 'px';
                     }
                 }
+
 
             }
 
